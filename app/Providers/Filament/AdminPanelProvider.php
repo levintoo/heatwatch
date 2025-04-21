@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -28,6 +29,12 @@ class AdminPanelProvider extends PanelProvider
             ->path('/')
             ->login()
             ->topNavigation()
+            ->navigationItems([
+                NavigationItem::make('Dashboard')
+                    ->url('/')
+                    ->isActiveWhen(fn() => request()->routeIs('filament.admin.pages.dashboard'))
+                    ->icon('hugeicons-home-01'),
+            ])
             ->colors([
                 'primary' => Color::Blue,
             ])
