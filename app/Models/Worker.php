@@ -20,7 +20,7 @@ class Worker extends Model
 
     public function getBmiAttribute(): ?float
     {
-        if (!$this->height_cm || !$this->weight_kg) {
+        if (! $this->height_cm || ! $this->weight_kg) {
             return null;
         }
 

@@ -37,11 +37,11 @@ class SiteResource extends Resource
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?Site $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn (?Site $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?Site $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn (?Site $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
@@ -60,7 +60,7 @@ class SiteResource extends Resource
             ])
             ->actions([
                 Action::make('panick')
-                    ->action(fn() => Notification::make()
+                    ->action(fn () => Notification::make()
                         ->title('Evacuation Notice Issued successfully')
                         ->success()
                         ->send())

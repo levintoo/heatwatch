@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UIAvatarsProvider implements Contracts\AvatarProvider
 {
-    public function get(Model | Authenticatable $record): string
+    public function get(Model|Authenticatable $record): string
     {
         $name = str(Filament::getNameForDefaultAvatar($record))
             ->trim()
@@ -17,6 +17,6 @@ class UIAvatarsProvider implements Contracts\AvatarProvider
             ->map(fn (string $segment): string => filled($segment) ? mb_substr($segment, 0, 1) : '')
             ->join(' ');
 
-        return 'https://ui-avatars.com/api/?name=' . urlencode($name);
+        return 'https://ui-avatars.com/api/?name='.urlencode($name);
     }
 }

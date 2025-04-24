@@ -33,14 +33,14 @@ class ReadSerialData extends Command
         $handle = fopen($port, 'r');
         if (! $handle) {
             $this->error('Unable to open serial port');
+
             return;
         }
-
 
         while (true) {
             $line = trim(fgets($handle));
             $data = json_decode($line, true);
-        \Laravel\Prompts\info($line);
+            \Laravel\Prompts\info($line);
 
             spin(
                 callback: fn () => sleep(3),

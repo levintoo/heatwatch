@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CheckInResource\Pages;
 use App\Models\CheckIn;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
@@ -47,11 +46,11 @@ class CheckInResource extends Resource
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?CheckIn $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn (?CheckIn $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?CheckIn $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn (?CheckIn $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 

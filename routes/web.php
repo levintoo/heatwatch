@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\SmsCallbackController;
+use App\Http\Controllers\USSDController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/dashboard', '/', )->name('filament.admin.pages.dashboard');
+Route::redirect('/dashboard', '/')->name('filament.admin.pages.dashboard');
 
-Route::post('/sms/callback', SmsCallbackController::class);
+Route::post('/ussd/callback', USSDController::class);

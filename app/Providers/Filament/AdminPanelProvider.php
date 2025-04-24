@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->navigationItems([
                 NavigationItem::make('Dashboard')
                     ->url('/')
-                    ->isActiveWhen(fn() => request()->routeIs('filament.admin.pages.dashboard'))
+                    ->isActiveWhen(fn () => request()->routeIs('filament.admin.pages.dashboard'))
                     ->icon('hugeicons-home-01'),
             ])
             ->userMenuItems([
