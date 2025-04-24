@@ -61,9 +61,11 @@ class WorkerResource extends Resource
 
                 TextColumn::make('phone'),
 
-                TextColumn::make('height_cm'),
+                TextColumn::make('height_cm')->toggleable()->toggledHiddenByDefault(),
 
-                TextColumn::make('weight_kg'),
+                TextColumn::make('weight_kg')->toggleable()->toggledHiddenByDefault(),
+
+                TextColumn::make('bmi'),
             ])
             ->filters([
                 //

@@ -15,4 +15,17 @@ class Worker extends Model
         'height_cm',
         'weight_kg',
     ];
+
+    protected $appends = ['bmi'];
+
+    public function getBmiAttribute(): ?float
+    {
+        if (!$this->height_cm || !$this->weight_kg) {
+            return null;
+        }
+
+        $heightInMeters = $this->height_cm / 100;
+
+        return round($this->weight_kg / ($heightInMeters ** 2), 1);
+    }
 }

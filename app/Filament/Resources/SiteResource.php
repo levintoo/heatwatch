@@ -7,7 +7,9 @@ use App\Models\Site;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -57,6 +59,14 @@ class SiteResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('panick')
+                    ->action(fn() => Notification::make()
+                        ->title('Evacuation Notice Issued successfully')
+                        ->success()
+                        ->send())
+                    ->color('danger')
+                    ->icon('hugeicons-alert-diamond')
+                    ->label('Evacuate'),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
