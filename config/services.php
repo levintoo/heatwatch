@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'weather' => [
+        'api_key' => env('WEATHER_API_KEY'),
+    ],
+
+    'at' => [
+        'api_key' => env('AFRICASTALKING_API_KEY'),
+        'username' => env('AFRICASTALKING_USERNAME'),
+        'sender_id' => env('AFRICASTALKING_SENDER_ID'),
+    ]
 ];

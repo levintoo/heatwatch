@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SiteResource\Pages;
+use App\Jobs\SendEvacuationNoticeJob;
 use App\Models\Site;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
@@ -60,10 +61,13 @@ class SiteResource extends Resource
             ])
             ->actions([
                 Action::make('panick')
-                    ->action(fn () => Notification::make()
-                        ->title('Evacuation Notice Issued successfully')
-                        ->success()
-                        ->send())
+                    ->action(function () {
+                        SendEvacuationNoticeJob::dispatch(Site::first());
+                        Notification::make()
+                            ->title('Evacuation Notice Issued successfully')
+                            ->success()
+                            ->send();
+                    })
                     ->color('danger')
                     ->icon('hugeicons-alert-diamond')
                     ->label('Evacuate'),

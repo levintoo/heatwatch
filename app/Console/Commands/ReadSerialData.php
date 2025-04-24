@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use Illuminate\Support\Facades\Cache;
 use function Laravel\Prompts\clear;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\note;
@@ -40,7 +41,6 @@ class ReadSerialData extends Command
         while (true) {
             $line = trim(fgets($handle));
             $data = json_decode($line, true);
-            \Laravel\Prompts\info($line);
 
             spin(
                 callback: fn () => sleep(3),
@@ -61,6 +61,14 @@ class ReadSerialData extends Command
                     headers: ['Humidity %', 'Temperature °C', 'Heat Index °C'],
                     rows: [[$humidity, $temperature, $heat_index]]
                 );
+
+                Cache::remember('live_serial', 60 * 60, function () use ($humidity, $temperature, $heat_index) {
+                    return [
+                        'humidity' => $humidity,
+                        'temperature' => $temperature,
+                        'heat_index' => $heat_index,
+                    ];
+                });
             } else {
                 error('Failed to decode JSON.');
             }

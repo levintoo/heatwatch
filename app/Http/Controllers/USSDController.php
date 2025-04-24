@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\GeneratePersonalizedBriefingJob;
 use App\Models\CheckIn;
 use App\Models\Report;
 use App\Models\Worker;
@@ -44,7 +45,9 @@ class USSDController extends Controller
             } catch (\Throwable $throwable) {
                 $response = "END Invalid worker ID \n";
             }
+            GeneratePersonalizedBriefingJob::dispatch($worker);
             $response = "END Welcome $worker->name, You are signed in successfully \n";
+
         }
         elseif ($text == '2') {
             $response = "CON Please input your worker ID \n";
@@ -79,9 +82,16 @@ class USSDController extends Controller
             $response = "CON Please input your worker ID \n";
         }
         elseif (Str::startsWith($text, '4*')) {
-            $workerId = explode('*', $text);
-            $worker = Worker::findOrFail($workerId);
-            $response = "END Thank for you for making this report \n";
+            $parts = explode('*', $text);
+            $workerId = $parts[1] ?? null;
+            try {
+                $worker = Worker::query()->findOrFail($workerId);
+                GeneratePersonalizedBriefingJob::dispatch($worker);
+                $response = "END Request success, you will receive the details via sms soon \n";
+            } catch (\Throwable $throwable) {
+                info($throwable->getMessage());
+                $response = "END Invalid worker ID \n";
+            }
         }
         elseif ($text == '5') {
             $safetyTips = [
