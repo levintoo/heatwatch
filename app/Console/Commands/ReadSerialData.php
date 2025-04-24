@@ -36,9 +36,11 @@ class ReadSerialData extends Command
             return;
         }
 
+
         while (true) {
             $line = trim(fgets($handle));
             $data = json_decode($line, true);
+        \Laravel\Prompts\info($line);
 
             spin(
                 callback: fn () => sleep(3),
