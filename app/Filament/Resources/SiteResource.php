@@ -21,7 +21,7 @@ class SiteResource extends Resource
 
     protected static ?string $slug = 'sites';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'hugeicons-maps-location-02';
 
     public static function form(Form $form): Form
     {

@@ -25,7 +25,7 @@ class CheckInResource extends Resource
 
     protected static ?string $slug = 'check-ins';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'hugeicons-contracts';
 
     public static function form(Form $form): Form
     {

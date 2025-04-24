@@ -21,7 +21,7 @@ class WorkerResource extends Resource
 
     protected static ?string $slug = 'workers';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'hugeicons-workout-sport';
 
     public static function form(Form $form): Form
     {

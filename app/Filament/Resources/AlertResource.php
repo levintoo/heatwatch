@@ -24,7 +24,7 @@ class AlertResource extends Resource
 
     protected static ?string $slug = 'alerts';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'hugeicons-alert-02';
 
     public static function form(Form $form): Form
     {
